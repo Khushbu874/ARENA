@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arena 1.0 — Faculty of Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&family=Cardo&display=swap" rel="stylesheet">
+  <meta name="description" content="Arena 1.0 - Freshers Party (Fresh Vibes, New Era) — 9 October 2025 | Engineering Department" />
+  <style>
+    :root{
+      --dusty-pink: #d8a4a8; 
+      --blush-peach: #f5d7cc; 
+      --metallic-rose: #b76e79; 
+      --deep-mauve: #7b4763; 
+      --dark-brown: #2b1b16; 
+      --glass: rgba(255,255,255,0.04);
+      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+      --muted: rgba(255,255,255,0.6);
+    }
+
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:radial-gradient(ellipse at 10% 10%, rgba(200,200,200,0.02), transparent 10%), #0b0b0d;
+      color:#fff;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    .hero{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:48px 24px 100px; 
+      z-index:1;
+      text-align:center;
+    }
+
+    .title-wrapper { 
+      position: relative; 
+      display: inline-block; 
+      line-height: 1; 
+      width: max-content;
+      animation: arenaIntro 2s forwards;
+    }
+
+    .arena {
+      font-family: 'Cardo', serif;
+      font-size: 80px;
+      margin: 20px 0 18px;
+      color: var(--blush-peach);
+      letter-spacing: 1.5px;
+      z-index: 2;
+      position: relative;
+      text-shadow:
+        0 0 5px var(--dusty-pink),
+        0 0 10px var(--metallic-rose),
+        0 0 15px var(--deep-mauve),
+        0 0 10px var(--dusty-pink);
+      animation: glowPulse 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes arenaIntro {
+      0%{transform: scale(3); opacity:0;}
+      50%{transform: scale(1.5); opacity:1;}
+      100%{transform: scale(1); opacity:1;}
+    }
+
+    @keyframes glowPulse{
+      from{text-shadow:0 0 5px var(--dusty-pink),0 0 10px var(--metallic-rose),0 0 15px var(--deep-mauve)}
+      to{text-shadow:0 0 10px var(--blush-peach),0 0 20px var(--metallic-rose),0 0 30px var(--deep-mauve)}
+    }
+
+    .lead{color:rgba(245,215,204,0.95);margin:0 0 18px;font-weight:400;font-size:1.2rem; max-width:800px}
+
+    /* Floating decorative shapes */
+    .float-wrap{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:0}
+    .float{position:absolute;border-radius:50%;opacity:0.9;mix-blend-mode:screen;filter:blur(0.4px)}
+    @keyframes floaty{
+      0%{transform:translateY(0) translateX(0)}
+      50%{transform:translateY(-40px) translateX(20px)}
+      100%{transform:translateY(0) translateX(0)}
+    }
+
+    /* Hide scroll content initially */
+    .scroll-content{opacity:0; transform: translateY(50px); transition: all 0.8s ease-in-out;}
+
+    .scroll-content.show{opacity:1; transform: translateY(0);}
+
+    /* Cards, organizers, etc */
+    .card{
+      background:var(--card-bg);
+      border-radius:16px;
+      padding:18px 20px;
+      margin:18px auto;
+      backdrop-filter:blur(6px);
+      box-shadow:0 8px 30px rgba(0,0,0,0.5);
+      border:1px solid rgba(255,255,255,0.03);
+      text-align:left;
+    }
+
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+    .info-block{padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));text-align:left}
+    .muted{color:var(--muted);font-size:14px}
+
+    .schedule{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+    .schedule .item{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:rgba(0,0,0,0.18);border-left:6px solid var(--dusty-pink)}
+    .time{font-weight:700;color:var(--blush-peach)}
+    .act{color:var(--metallic-rose);font-weight:600}
+
+    .vip-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+    .vip{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:10px;font-size:14px;color:var(--blush-peach);border:1px solid rgba(255,255,255,0.02)}
+
+    .marquee-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .marquee-content {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: marquee 15s linear infinite;
+    }
+    .marquee-content .code {
+      flex-shrink: 0;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+      color: var(--dusty-pink);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .marquee-content .duplicate {
+      display: flex;
+      gap: 24 px;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .organizers{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
+    .organizer{background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(255,255,255,0.02));padding:12px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.03)}
+    .organizer img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,0.04)}
+    .organizer h4{margin:8px 0 4px;font-size:15px;color:var(--blush-peach)}
+    .organizer p{margin:0;font-size:13px;color:var(--muted)}
+
+    footer{margin-top:36px;padding:20px 8px;color:var(--muted);text-align:center;font-size:14px}
+
+    @media (max-width:880px){
+      .info-grid{grid-template-columns:1fr}
+      .hero{padding-top:28px;padding-bottom:120px}
+      .arena{font-size:50px}
+      .lead{font-size:1rem}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Orbs Background -->
+  <div class="float-wrap" aria-hidden="true">
+    <div class="float" style="width:220px;height:220px;left:4%;top:10%;background:radial-gradient(circle at 30% 30%, rgba(183,110,121,0.8), rgba(183,110,121,0.08));animation:floaty 6s ease-in-out infinite;"></div>
+    <div class="float" style="width:140px;height:140px;left:80%;top:6%;background:radial-gradient(circle at 30% 30%, rgba(244,194,194,0.8), rgba(244,194,194,0.03));animation:floaty 5s ease-in-out infinite;animation-delay:1s"></div>
+    <div class="float" style="width:90px;height:90px;left:55%;top:32%;background:radial-gradient(circle at 40% 30%, rgba(255,255,255,0.06), rgba(183,110,121,0.02));animation:floaty 7s ease-in-out infinite;animation-delay:2s"></div>
+    <div class="float" style="width:70px;height:70px;left:12%;top:48%;background:radial-gradient(circle at 30% 30%, rgba(123,63,97,0.6), rgba(244,194,194,0.02));animation:floaty 8s ease-in-out infinite;animation-delay:3s"></div>
+    <div class="float" style="width:180px;height:180px;left:65%;top:70%;background:radial-gradient(circle at 30% 30%, rgba(244,194,194,0.5), rgba(183,110,121,0.02));animation:floaty 6s ease-in-out infinite;animation-delay:1.5s"></div>
+    <div class="float" style="width:120px;height:120px;left:30%;top:80%;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), rgba(244,194,194,0.01));animation:floaty 5s ease-in-out infinite;animation-delay:2.5s"></div>
+    <div class="float" style="width:100px;height:100px;left:50%;top:15%;background:radial-gradient(circle at 30% 30%, rgba(183,110,121,0.4), rgba(123,63,97,0.02));animation:floaty 7s ease-in-out infinite;animation-delay:3s"></div>
+    <div class="float" style="width:60px;height:60px;left:85%;top:50%;background:radial-gradient(circle at 30% 30%, rgba(244,194,194,0.3), rgba(255,255,255,0.01));animation:floaty 6s ease-in-out infinite;animation-delay:1s"></div>
+  </div>
+
+  <div class="hero">
+    <div class="container">
+      <div class="title-wrapper">
+        <h1 class="arena">ARENA 1.0</h1>
+      </div>
+      <h3 style="margin:0;font-weight:600;color:var(--metallic-rose);letter-spacing:1.2px">Fresh Vibes, New Era</h3><br>
+      <p class="lead">You are warmly invited!<br>
+        We would be deeply honored by your gracious presence at the <em>Engineering Department's Fresher's Party</em> , scheduled to be held on <strong>9th October 2025</strong>.<br></p>
+    </div>
+  </div>
+
+  <!-- Scroll Content -->
+  <div class="container scroll-content">
+    <!-- Event Cards -->
+    <div class="card">
+      <div class="info-grid">
+        <div class="info-block">
+          <h3 style="margin:0 0 8px;color:var(--dusty-pink)">Event Details</h3>
+          <p class="muted">Date: <strong>9 October 2025</strong></p>
+          <p class="muted">Timing: <strong>10:00 AM — 4:00 PM</strong></p>
+          <p class="muted">Venue: <strong>Aastha Manch, SRU Campus, Raipur(C.G.)</strong></p>
+        </div>
+        <div class="info-block">
+          <h3 style="margin:14px 0 8px;color:var(--dusty-pink)">Special Guests</h3>
+          <div class="vip-list">
+            <div class="vip">Vice Chairman</div>
+            <div class="vip">Vice Chancellor incharge</div>
+            <div class="vip">Registrar</div>
+            <div class="vip">All Deans</div>
+            <div class="vip">Department Heads</div>
+            <div class="vip">Faculty of Engineering</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee-card">
+        <h3 style="margin:0 0 8px;color:var(--dusty-pink)">Dress Code</h3>
+        <div class="marquee-content">
+          <div class="code">Fresher Boys — Formal Party Wear</div>
+          <div class="code">Fresher Girls — Saree</div>
+          <div class="code">Senior Girls — Suit</div>
+          <div class="code">Senior Boys — Kurta Pyjama</div>
+          <div class="duplicate">
+            <div class="code">Fresher Boys — Formal Party Wear</div>
+            <div class="code">Fresher Girls — Saree</div>
+            <div class="code">Senior Girls — Suit</div>
+            <div class="code">Senior Boys — Kurta Pyjama</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule">
+        <h3 style="margin:0 0 8px;color:var(--dusty-pink)">Event Schedule</h3>
+        <div class="item"><div class="time">10:00 AM - 11:00 AM</div><div class="act">Welcome</div></div>
+        <div class="item"><div class="time">11:00 AM - 12:00 PM</div><div class="act">Address</div></div>
+        <div class="item"><div class="time">12:00 PM - 12:30 PM</div><div class="act">Ramp Walk</div></div>
+        <div class="item"><div class="time">12:30 PM - 1:30 PM</div><div class="act">Games & Fun</div></div>
+        <div class="item"><div class="time">1:30 PM - 2:30 PM</div><div class="act">Lunch Break</div></div>
+        <div class="item"><div class="time">2:30 PM - 3:30 PM</div><div class="act">Cultural Program</div></div>
+        <div class="item"><div class="time">3:30 PM - 4:00 PM</div><div class="act">Tag Distribution</div></div>
+        <div class="item"><div class="time">4:00 PM - 4:30 PM</div><div class="act">Photo Session</div></div>
+      </div>
+    </div>
+
+    <!-- Organizers -->
+    <div class="card"> 
+      <h3 style="margin-top:20px;color:var(--blush-peach)">Event Coordinators</h3>
+      <div class="organizers">
+        <div class="organizer"><img src="Assets/Ghanshyam.jpg" alt="Organizer 2"><h4>Ghanshyam Dewangan</h4><p>B.Tech 7th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Karan.jpg" alt="Organizer 4"><h4>Karan Mittal</h4><p>B.Tech 5th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Rajendra.jpg" alt="Organizer 5"><h4>Rajendra Tiwari</h4><p>B.Tech 5th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Raunak.jpg" alt="Organizer 6"><h4>Raunak Tiwari</h4><p>B.Tech 5th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Suraj.jpg" alt="Organizer 6"><h4>Suraj Ram Dangi</h4><p>B.Tech 5th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Om.jpg" alt="Organizer 8"><h4>Om Singh</h4><p>B.Tech 5th semester (CSE)</p></div>
+        <!-- <div class="organizer"><img src="Assets/Vineet.jpg" alt="Organizer 8"><h4>Vineet Gupta</h4><p>Bca 5th semester</p></div> -->
+        <div class="organizer"><img src="Assets/Khushbu.jpg" alt="Organizer 1"><h4>Khushbu Dewangan</h4><p>B.Tech 7th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Pooja.jpg" alt="Organizer 3"><h4>Pooja Sahu</h4><p>B.Tech 7th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Sejal.jpg" alt="Organizer 7"><h4>Sejal Urkude</h4><p>B.Tech 5th semester (CSE)</p></div>
+        <div class="organizer"><img src="Assets/Dili.jpg" alt="Organizer 9"><h4>Dili Bobdi Sharma</h4><p>B.Tech 3th semester (CSE)</p></div>
+      </div>
+    </div>
+
+    <footer>
+      <div>Organized by 3rd & 4th year students of Engineering Department.</div>
+      <!-- <div>Made with ❤️ by the 3rd & 4th year batch — Arena 1.0</div>
+      <div style="margin-top:6px;font-size:13px;color:var(--muted)">For queries contact with: <strong>8446924439, 8225819906</strong></div> -->
+    </footer>
+  </div>
+
+  <script>
+    // Scroll Animation for boxes
+    const scrollElems = document.querySelectorAll('.scroll-content, .card, .organizers');
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, {threshold:0.2});
+
+    scrollElems.forEach(el=>observer.observe(el));
+  </script>
+</body>
+</html>
